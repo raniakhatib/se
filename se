@@ -1,0 +1,46 @@
+class PmuRide:
+    def __init__(self):
+        self.users = {}
+
+    def register_user(self, email, password, user_type):
+        if email not in self.users:
+            self.users[email] = {'password': password, 'type': user_type}
+            print(f"User {email} registered successfully!")
+        else:
+            print("User already exists!")
+
+    def login_user(self, email, password):
+        if email in self.users and self.users[email]['password'] == password:
+            print(f"Welcome, {email}!")
+            user_type = self.users[email]['type']
+            if user_type == 'rider':
+                self.view_available_drivers()
+        else:
+            print("Invalid email or password")
+
+    def view_available_drivers(self):
+        print("Available drivers: Driver1, Driver2, Driver3")
+
+    def run(self):
+        while True:
+            print("\n1. Register\n2. Login\n3. Exit")
+            choice = input("Enter your choice: ")
+
+            if choice == '1':
+                email = input("Enter email: ")
+                password = input("Enter password: ")
+                user_type = input("Enter user type (rider/driver): ")
+                self.register_user(email, password, user_type)
+            elif choice == '2':
+                email = input("Enter email: ")
+                password = input("Enter password: ")
+                self.login_user(email, password)
+            elif choice == '3':
+                print("Exiting PmuRide. Goodbye!")
+                break
+            else:
+                print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    pmu_ride_app = PmuRide()
+    pmu_ride_app.run()
